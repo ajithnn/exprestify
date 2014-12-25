@@ -1,0 +1,35 @@
+{
+  "name": "exprestify",
+  "version": "0.0.1",
+  "description": "REST API build using express framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ajithnn/exprestify.git"
+  },
+  "keywords": [
+    "express",
+    "REST",
+    "JSON",
+    "XML"
+  ],
+  "author": "Ajith N N <ajithnn20@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ajithnn/exprestify/issues"
+  },
+  "homepage": "https://github.com/ajithnn/exprestify",
+  "devDependencies": {
+    "body-parser": "^1.10.0",
+    "express": "^4.10.6"
+  },
+  "dependencies": {
+    "body-parser": "^1.10.0",
+    "express": "^4.10.6",
+    "http": "0.0.0",
+    "pem": "^1.4.4"
+  }
+}
