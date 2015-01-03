@@ -11,39 +11,49 @@ var app = express()
 var rport;
 var rports;
 
-var catchAllErrors = function (err, req, res, next) {
-    res.status(500);
-    res.render('error', {
-        error: err
-    });
-};
-
 module.exports = {
     /** 
     GET function which takes a route on which the call needs to act and also the Value to return
     **/
     get: function (onPath, returnValueOrFunc) {
         app.get(onPath, function (req, res) {
-            var contentType = req.get('content-type')||"None";
-            if (typeof returnValueOrFunc == 'function') {
-                res.send(returnValueOrFunc(req.query,contentType));
-            } else {
-                res.send(returnValueOrFunc)
+            try {
+                var contentType = req.get('content-type') || "None";
+                if (typeof returnValueOrFunc == 'function') {
+                    res.send(returnValueOrFunc(false,req.query, contentType));
+                } else {
+                    res.send(returnValueOrFunc)
+                }
+            } catch (e) {
+                if (typeof returnValueOrFunc == 'function') {
+                    returnValueOrFunc(e,"","");
+                } else {
+                    throw e;
+                }
             }
         });
+
     },
     /** 
     GET function which takes a route on which the call needs to act and also the File to return
     **/
     getfile: function (onPath, returnFileFunc) {
         app.get(onPath, function (req, res) {
-            if(typeof returnFileFunc == 'function'){
-                res.sendFile(path.join(__dirname, '../../', returnFileFunc(req.query)));
-            }
-            else{
-            res.sendFile(path.join(__dirname, '../../', returnFileFunc))
+            try {
+                if (typeof returnFileFunc == 'function') {
+                    res.sendFile(path.join(__dirname, '../../', returnFileFunc(false,req.query)));
+                } else {
+                    res.sendFile(path.join(__dirname, '../../', returnFileFunc))
+                }
+            } catch (e) {
+                if (typeof returnFileFunc == 'function') {
+                    returnFileFunc(e,"");
+                } else {
+                    throw e;
+                }
             }
         });
+
     },
     post: function (onPath, data, returnFunction) {
         return returnFunction();
@@ -56,7 +66,6 @@ module.exports = {
             throw new Error('Port needs to be greater than 1024');
         }
         this.port = port;
-        app.use(catchAllErrors);
         http.createServer(app).listen(port, retFunction);
     },
     /** 
@@ -67,7 +76,6 @@ module.exports = {
             throw new Error('Port needs to be greater than 1024');
         }
         this.ports = port;
-        app.use(catchAllErrors);
         https.createServer(options, app).listen(port, retFunction);
     },
     port: rport,
