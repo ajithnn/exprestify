@@ -140,6 +140,10 @@ rest.listen(3000, function () {
     console.log("Listening on port 0.0.0.0:%s", rest.port)
 })
 ```
+## TODO
+
+ - Mocha Tests.
+ - Add more Multer options to Multipart Post handler.
 
 ## License
 
