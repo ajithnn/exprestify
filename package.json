@@ -1,7 +1,7 @@
 {
   "name": "exprestify",
-  "version": "0.0.1",
-  "description": "REST API build using express framework",
+  "version": "0.1.0",
+  "description": "REST API built using express framework",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,7 +14,8 @@
     "express",
     "REST",
     "JSON",
-    "XML"
+    "Multipart form",
+    "GET POST"
   ],
   "author": "Ajith N N <ajithnn20@gmail.com>",
   "license": "ISC",
@@ -22,10 +23,6 @@
     "url": "https://github.com/ajithnn/exprestify/issues"
   },
   "homepage": "https://github.com/ajithnn/exprestify",
-  "devDependencies": {
-    "body-parser": "^1.10.0",
-    "express": "^4.10.6"
-  },
   "dependencies": {
     "body-parser": "^1.10.0",
     "express": "^4.10.6",
