@@ -91,7 +91,7 @@ module.exports = {
     multipost: function (onPath, returnFunction, options) {
         app.use(onPath, multer({
             dest: options.FilePath,
-            rename:options.Rename
+            rename: options.Rename
         }));
         app.post(onPath, function (req, res) {
             try {
@@ -101,6 +101,40 @@ module.exports = {
                     } else if (options.PostType == 'file') {
                         res.status(200).send(returnFunction(false, req.files));
                     }
+                } else {
+                    res.status(200).send(returnFunction);
+                }
+            } catch (e) {
+                if (typeof returnFunction == 'function') {
+                    res.status(400).send(returnFunction(e, ""));
+                } else {
+                    throw e;
+                }
+            }
+        });
+    },
+    put: function (onPath, returnFunction) {
+        app.put(onPath, function (req, res) {
+            try {
+                if (typeof returnFunction == 'function') {
+                    res.status(200).send(returnFunction(false, req.params));
+                } else {
+                    res.status(200).send(returnFunction);
+                }
+            } catch (e) {
+                if (typeof returnFunction == 'function') {
+                    res.status(400).send(returnFunction(e, ""));
+                } else {
+                    throw e;
+                }
+            }
+        });
+    },
+    delete: function (onPath, returnFunction) {
+        app.delete(onPath, function (req, res) {
+            try {
+                if (typeof returnFunction == 'function') {
+                    res.status(200).send(returnFunction(false, req.params));
                 } else {
                     res.status(200).send(returnFunction);
                 }
