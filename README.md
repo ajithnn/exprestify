@@ -31,6 +31,14 @@ var creds = {
     cert: fs.readFileSync('./assets/key-cert.pem')
 }
 
+var header ={
+"Access-Control-Allow-Origin":"http://localhost:4000",
+"Access-Control-Allow-Methods":"GET,PUT,POST,DELETE",
+"Access-Control-Allow-Headers":"Content-Type"
+};
+
+rest.setHeaders(header);
+
 rest.get('/', "This is returned")
 rest.get('/page1', function (err, query, contentType) {
     if (!err) {

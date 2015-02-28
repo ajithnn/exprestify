@@ -36,7 +36,7 @@ module.exports = {
                 if (typeof returnValueOrFunc == 'function') {
                     res.send(returnValueOrFunc(false, req.query, contentType));
                 } else {
-                    res.send(returnValueOrFunc)
+                    res.send(JSON.stringify(returnValueOrFunc))
                 }
             } catch (e) {
                 if (typeof returnValueOrFunc == 'function') {
@@ -76,7 +76,7 @@ module.exports = {
                 if (typeof returnFunction == 'function') {
                     res.status(200).send(returnFunction(false, req.body));
                 } else {
-                    res.status(200).send(returnFunction);
+                    res.status(200).send(JSON.stringify(returnFunction));
                 }
             } catch (e) {
                 if (typeof returnFunction == 'function') {
@@ -102,7 +102,7 @@ module.exports = {
                         res.status(200).send(returnFunction(false, req.files));
                     }
                 } else {
-                    res.status(200).send(returnFunction);
+                    res.status(200).send(JSON.stringify(returnFunction));
                 }
             } catch (e) {
                 if (typeof returnFunction == 'function') {
@@ -119,7 +119,7 @@ module.exports = {
                 if (typeof returnFunction == 'function') {
                     res.status(200).send(returnFunction(false, req.params));
                 } else {
-                    res.status(200).send(returnFunction);
+                    res.status(200).send(JSON.stringify(returnFunction));
                 }
             } catch (e) {
                 if (typeof returnFunction == 'function') {
@@ -136,7 +136,7 @@ module.exports = {
                 if (typeof returnFunction == 'function') {
                     res.status(200).send(returnFunction(false, req.params));
                 } else {
-                    res.status(200).send(returnFunction);
+                    res.status(200).send(JSON.stringify(returnFunction));
                 }
             } catch (e) {
                 if (typeof returnFunction == 'function') {
@@ -146,6 +146,17 @@ module.exports = {
                 }
             }
         });
+    },
+    
+    setHeaders: function(headerObj){
+            var headers = Object.keys(headerObj);
+            app.use(function(req,res,next){
+                for(i in headers){
+                    console.log(headers[i]+" : "+headerObj[headers[i]])
+                    res.header(headers[i],headerObj[headers[i]]);
+                }
+                next();
+            });
     },
     /** 
     listen function for http
