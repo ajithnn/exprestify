@@ -16,6 +16,14 @@ app.use(function(req, res, next) {
 opt = {
     extended: false
 }
+/*Cross origin resource sharing */
+var header ={
+"Access-Control-Allow-Origin":"http://localhost:4000", //It can be restricted to any other domains by replacing the link and open for all domains, using *
+"Access-Control-Allow-Methods":"GET,PUT,POST,DELETE",
+"Access-Control-Allow-Headers":"Content-Type"
+};
+
+rest.setHeaders(header);
 /* This defines the kind of content the server can handle*/
 var options = {
     contentType: "json",//The content type could be text also. In case of files, check the other example to send photos.

@@ -2,6 +2,14 @@
 The code below is going to used to send files to a server and saving them there.*/
 
 var rest = require('exprestify') //Module required
+/*Cross origin resource sharing*/
+var header ={
+"Access-Control-Allow-Origin":"http://localhost:4000", //It can be restricted to any other domains by replacing the link and open for all domains, using *
+"Access-Control-Allow-Methods":"GET,PUT,POST,DELETE",
+"Access-Control-Allow-Headers":"Content-Type"
+};
+
+rest.setHeaders(header);
 
 /*The following code defines where will the file be saved,how will it be named etc */
 var multiopt ={
