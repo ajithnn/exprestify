@@ -1,7 +1,7 @@
 {
   "name": "exprestify",
-  "version": "0.1.0",
-  "description": "REST API built using express framework",
+  "version": "0.3.0",
+  "description": "REST API built using express framework,with support for socket io and adding custom headers at server side",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
