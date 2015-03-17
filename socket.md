@@ -1,3 +1,6 @@
+## Usage
+
+```js
 var rest = require('exprestify')
 <script src="/socket.io/socket.io.js"></script>
 var rest = require('exprestify')
@@ -31,3 +34,4 @@ io.on('connection', function (socket) {
 });
 
 server.listen(3000)
+```
