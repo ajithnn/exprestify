@@ -8,6 +8,7 @@ var path = require('path')
 var multer = require('multer')
 var bodyParser = require('body-parser')
 var app = express()
+var server = require('http').Server(app);
 var rport;
 var rports;
 //************************************************************************************************
@@ -157,6 +158,9 @@ module.exports = {
                 }
                 next();
             });
+    },
+    getSocketServer: function(){
+	    return server;
     },
     /** 
     listen function for http
