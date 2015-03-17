@@ -1,4 +1,3 @@
-0c4de9a83b18:exptest z085331$ clear
 var rest = require('exprestify')
 <script src="/socket.io/socket.io.js"></script>
 var rest = require('exprestify')
