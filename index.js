@@ -153,7 +153,6 @@ module.exports = {
             var headers = Object.keys(headerObj);
             app.use(function(req,res,next){
                 for(i in headers){
-                    console.log(headers[i]+" : "+headerObj[headers[i]])
                     res.header(headers[i],headerObj[headers[i]]);
                 }
                 next();
