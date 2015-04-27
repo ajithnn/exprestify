@@ -156,6 +156,11 @@ rest.listen(3000, function () {
     console.log("Listening on port 0.0.0.0:%s", rest.port)
 })
 ```
+## Socket Support
+
+See [Socket.md](socket.md) for Socket.io Support. (Version 0.3.7 has a breaking change for socket implementation)
+
+
 ## TODO
 
  - Mocha Tests.

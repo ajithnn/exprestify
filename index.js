@@ -6,10 +6,9 @@ var http = require('http')
 var https = require('https')
 var path = require('path')
 var multer = require('multer')
+var server;
 var bodyParser = require('body-parser')
 var app = express()
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
 var rport;
 var rports;
 //************************************************************************************************
@@ -31,8 +30,8 @@ module.exports = {
     /** 
     GET function which takes a route on which the call needs to act and also the Value to return
     **/
-    get: function (onPath, returnValueOrFunc) {
-        app.get(onPath, function (req, res) {
+    get: function(onPath, returnValueOrFunc) {
+        app.get(onPath, function(req, res) {
             try {
                 var contentType = req.get('content-type') || "None";
                 if (typeof returnValueOrFunc == 'function') {
@@ -53,8 +52,8 @@ module.exports = {
     /** 
     GET function which takes a route on which the call needs to act and also the File to return
     **/
-    getfile: function (onPath, returnFileFunc) {
-        app.get(onPath, function (req, res) {
+    getfile: function(onPath, returnFileFunc) {
+        app.get(onPath, function(req, res) {
             try {
                 if (typeof returnFileFunc == 'function') {
                     res.sendFile(path.join(__dirname, '../../', returnFileFunc(false, req.query)));
@@ -72,8 +71,8 @@ module.exports = {
 
     },
     /** POST function which takes the route and a return value OR Callback function. There is not version of POST which can return a file, as the             client needs to handle it by making a getfile call.**/
-    post: function (onPath, returnFunction, options) {
-        app.post(onPath, getContentType(options), function (req, res) {
+    post: function(onPath, returnFunction, options) {
+        app.post(onPath, getContentType(options), function(req, res) {
             try {
                 if (typeof returnFunction == 'function') {
                     res.status(200).send(returnFunction(false, req.body));
@@ -90,12 +89,12 @@ module.exports = {
         });
     },
     /** MultiPart POST function with two options for either reading fields or files.**/
-    multipost: function (onPath, returnFunction, options) {
+    multipost: function(onPath, returnFunction, options) {
         app.use(onPath, multer({
             dest: options.FilePath,
             rename: options.Rename
         }));
-        app.post(onPath, function (req, res) {
+        app.post(onPath, function(req, res) {
             try {
                 if (typeof returnFunction == 'function') {
                     if (options.PostType == 'field') {
@@ -115,8 +114,8 @@ module.exports = {
             }
         });
     },
-    put: function (onPath, returnFunction) {
-        app.put(onPath, function (req, res) {
+    put: function(onPath, returnFunction) {
+        app.put(onPath, function(req, res) {
             try {
                 if (typeof returnFunction == 'function') {
                     res.status(200).send(returnFunction(false, req.params));
@@ -132,8 +131,8 @@ module.exports = {
             }
         });
     },
-    delete: function (onPath, returnFunction) {
-        app.delete(onPath, function (req, res) {
+    delete: function(onPath, returnFunction) {
+        app.delete(onPath, function(req, res) {
             try {
                 if (typeof returnFunction == 'function') {
                     res.status(200).send(returnFunction(false, req.params));
@@ -149,33 +148,36 @@ module.exports = {
             }
         });
     },
-    
-    setHeaders: function(headerObj){
-            var headers = Object.keys(headerObj);
-            app.use(function(req,res,next){
-                for(i in headers){
-                    res.header(headers[i],headerObj[headers[i]]);
-                }
-                next();
-            });
+
+    setHeaders: function(headerObj) {
+        var headers = Object.keys(headerObj);
+        app.use(function(req, res, next) {
+            for (i in headers) {
+                res.header(headers[i], headerObj[headers[i]]);
+            }
+            next();
+        });
     },
-    getSocketServer: function(){
-	    return io;
+    getSocketServer: function() {
+        server = require('http').Server(app);
+        var io = require('socket.io')(server);
+        return io;
     },
     /** 
     listen function for http
     **/
-    listen: function (port, retFunction) {
+    listen: function(port, retFunction) {
         if (port < 1024) {
             throw new Error('Port needs to be greater than 1024');
         }
         this.port = port;
-        http.createServer(app).listen(port, retFunction);
+        var curServ = server || http.createServer(app) ;
+        curServ.listen(port, retFunction);
     },
     /** 
     listen function for https
     **/
-    listens: function (port, options, retFunction) {
+    listens: function(port, options, retFunction) {
         if (port < 1024) {
             throw new Error('Port needs to be greater than 1024');
         }

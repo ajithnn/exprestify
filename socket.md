@@ -22,13 +22,13 @@ rest.getfile('/', function (err, query) {
 })
 
 // Needs to be after the server actions for the get, post etc have been defined. 
-// Because the get Socket server returns the app variable from the express context, for use with socketio.
+// This is a change after 0.3.7 version, if you had used previous versions, this is a breaking change.
 var io = rest.getSocketServer()
 
 io.on('connection', function (socket) {
     console.log("In Socket");
     socket.emit("news",{my:'data'});
 });
-
+// Again different from previous version no longer need to use a new variable to call listen.
 rest.listen(3000)
 ```
