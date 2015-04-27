@@ -25,7 +25,7 @@ To add to your project as a dependency:
 ```js
 var rest = require('exprestify')
 var fs = require('fs')
-
+// nly fr HTTPS examples.
 var creds = {
     key: fs.readFileSync('./assets/key.pem'),
     cert: fs.readFileSync('./assets/key-cert.pem')
@@ -35,10 +35,12 @@ var header ={
 "Access-Control-Allow-Origin":"http://localhost:4000",
 "Access-Control-Allow-Methods":"GET,PUT,POST,DELETE",
 "Access-Control-Allow-Headers":"Content-Type"
-};
+}; // header JSOn to set HTTP Headers -  format : { HeaderName : HeaderValue }
 
+// Set HTTP Headers
 rest.setHeaders(header);
 
+// Ways of using get.
 rest.get('/', "This is returned")
 rest.get('/page1', function (err, query, contentType) {
     if (!err) {
@@ -54,6 +56,9 @@ rest.get('/page1', function (err, query, contentType) {
 })
 rest.get('/page2', "This is page2")
 rest.get('/page3', "This is page3")
+
+
+// GET File to get a file from the server.
 rest.getfile('/index', function (err, query) {
     if (!err) {
         if (query.value) {
@@ -68,9 +73,11 @@ rest.getfile('/index', function (err, query) {
     }
 })
 
+
 opt = {
     extended: false
 }
+// Options object for post. contentType can be text,json,raw or urlencoded.
 var options = {
     contentType: "text",
     config: opt
@@ -85,7 +92,8 @@ rest.post('/pagepost', function (err, data) {
 }, options)
 
 
-
+// Options object for MultiPart Post.
+// This is the multer options object for the multipart Post.
 var multiopt = {
     FilePath: "./assets/",
     PostType: "file",

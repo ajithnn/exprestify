@@ -1,6 +1,6 @@
 {
   "name": "exprestify",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "REST API built using express framework,with support for socket io and adding custom headers at server side",
   "main": "index.js",
   "scripts": {
@@ -24,10 +24,11 @@
   },
   "homepage": "https://github.com/ajithnn/exprestify",
   "dependencies": {
-    "body-parser": "^1.10.0",
-    "express": "^4.10.6",
+    "body-parser": "^1.12.3",
+    "express": "^4.12.3",
     "http": "0.0.0",
-    "multer": "^0.1.6",
-    "pem": "^1.4.4"
+    "multer": "^0.1.8",
+    "pem": "^1.7.2",
+    "socket.io": "*"
   }
 }

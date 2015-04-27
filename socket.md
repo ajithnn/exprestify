@@ -2,10 +2,7 @@
 
 ```js
 var rest = require('exprestify')
-<script src="/socket.io/socket.io.js"></script>
-var rest = require('exprestify')
-var rest = require('exprestify')
-var fs = require('fs')
+
 var header ={
 "Access-Control-Allow-Origin":"http://localhost:4000",
 "Access-Control-Allow-Methods":"GET,PUT,POST,DELETE",
@@ -24,14 +21,14 @@ rest.getfile('/', function (err, query) {
     }
 })
 
-
-var server = rest.getSocketServer()
-var io = require('socket.io')(server);
+// Needs to be after the server actions for the get, post etc have been defined. 
+// Because the get Socket server returns the app variable from the express context, for use with socketio.
+var io = rest.getSocketServer()
 
 io.on('connection', function (socket) {
     console.log("In Socket");
     socket.emit("news",{my:'data'});
 });
 
-server.listen(3000)
+rest.listen(3000)
 ```
