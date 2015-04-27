@@ -1,6 +1,6 @@
 {
   "name": "exprestify",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "REST API built using express framework,with support for socket io and adding custom headers at server side",
   "main": "index.js",
   "scripts": {
