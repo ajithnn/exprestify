@@ -160,6 +160,9 @@ rest.listen(3000, function () {
 
 See [Socket.md](socket.md) for Socket.io Support. (Version 0.3.7 has a breaking change for socket implementation)
 
+## Thanks To
+
+@rishibhatnagar1 for all the examples.
 
 ## TODO
 
