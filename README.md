@@ -162,7 +162,7 @@ See [Socket.md](socket.md) for Socket.io Support. (Version 0.3.7 has a breaking 
 
 ## Thanks To
 
-@rishibhatnagar1 for all the examples.
+[rishibhatnagar1](https://github.com/rishibhatnagar1) for all the examples.
 
 ## TODO
 
